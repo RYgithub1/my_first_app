@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import "package:flutter/material.dart";
-
 // import 'package:flutter/material.dart':
 // ma略
 
@@ -12,9 +11,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // _でprivate、他のクラスからアクセス不可
+  // _でprivate、他のクラスからアクセス不可。=は代入、等号でない。
   String _textHeader = "あなたの名前を教えて！";
   TextEditingController _textEditingController = TextEditingController();
+  Widget _imageWidget = Container();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // f4チェック->選んで略をうちエンターして()して中身欲しい物
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutterへの挑戦v3"),
+        title: Text("Flutter挑戦v3_iOSAndroid実機2台検証完了"),
         centerTitle: true,
       ),
       body: Container(
@@ -42,11 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
             TextField(
               keyboardType: TextInputType.text,
               style: TextStyle(fontSize: 20.0),
-              controller: null, // TODO: 入力した文字を管理スつTextCont
+              // controller: null, // TODO: 入力した文字を管理するに変数指定、TextCont
+              controller: _textEditingController,
             ),
             // image.assetにサイズ導入したいのでwidgetで囲みたくopt*ret
             // Expanded(child: Image.asset("assets/images/hello.png")),
-            Expanded(child: Container()),
+            // Expanded(child: Container()),
+            Expanded(child: _imageWidget),
             // f4して@requiredがあったら絶対記載しないといけな属性
             // opt*ret ->sizedBox挿入して、ボタンのサイズ変更へ
             SizedBox(
@@ -56,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // onPressed: null, // TODO:
                 onPressed: () => _onClick(),
                 child: Text(
-                  "プッシュここ",
+                  "プッシュここさ",
                   style: TextStyle(fontSize: 18.0),
                 ),
               ),
@@ -70,14 +72,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // voidの場合は書いても書かなくても良い
   void _onClick() {
-    // 文字
-    var inputText = _textEditingController.text;
-    _textHeader = "Hello. $inputTextさん";
+    // ボタン押して、状態が変化した事を反映するならsetState。setStateによりbuild()がまわり画面が更新される
+    // 変更した変数をもった状態で、build()で書き直して画面全体を変える、のがflutter。statefulならsetState()
+    setState(() {
+      // 文字
+      // ローカル変数はvar、複数クラスへグローバル変数ならString
+      var inputText = _textEditingController.text;
+      _textHeader = "Hello.$inputTextさん";
 
-    // 画像
+      // 画像
+      _imageWidget = Image.asset("assets/images/hello.png");
+      // Image.network()だけでオンライン画像をもってこれちゃう
+      // _imageWidget = Image.network("https://pixabay.com/ja/photos/%E3%82%AB%E3%83%A1-%E6%B3%B3%E3%81%90-%E3%82%A6%E3%83%9F%E3%82%AC%E3%83%A1-863336/");
+    });
   }
 }
 
 // comm*s = ホットリロード
 // スキューモフィズム（GUIへ）→フラットデザイン（シンプル画面）→
 // →マテリアルデザイン（GUIかつシンプル）でわかりやすく。物理法則を導入して人間の脳への負担をなくしたいGoogle→MaterialAppに集約
+// 動かす前にやろう ①キャッシュ消す% flutter clean  ②shift*comm*opt*L リフォーマット
+// iOS)Flutter右クリ)Flutterでopen iOS module)xCode開いて実機選択してrun

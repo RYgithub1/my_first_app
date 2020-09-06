@@ -20,6 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // returnの中身が戻り値としてアウトプットするもの
       title: "Flutterゴーゴー！",
+      // 一つの画面でなく、アプリ全体に関わる項目ゆえ、main.dart)MaterialAppをチェックして修正
+      // MaterialAppでf4）this.debugShowCheckedModeBanner = true,。Falseにして不要バナー消す
+      debugShowCheckedModeBanner: false,
+
+      // ダークテーマにしたい）共通項目ゆえここ）F4してtheme見つけてthemeでF4で使い方みる。dark or light
+      theme: ThemeData.dark(),
+
       // homeはホーム画面
       // 赤波線にoption*returnでimport推測
       home: HomeScreen(),
