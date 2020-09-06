@@ -18,9 +18,24 @@ class MyApp extends StatelessWidget {
   // build(引数インプット値パラメータ)
   Widget build(BuildContext context) {
     // コンストラクタに引数いくつか指定。クラス（ただの設計図）。メソッドとプロパティ定義。F４吹っ飛ぶ！
+<<<<<<< HEAD
     return CupertinoApp(
       title: "CupertinoApp！",
       debugShowCheckedModeBanner: false,
+=======
+    return MaterialApp(
+      // returnの中身が戻り値としてアウトプットするもの
+      title: "Flutterゴーゴー！",
+      // 一つの画面でなく、アプリ全体に関わる項目ゆえ、main.dart)MaterialAppをチェックして修正
+      // MaterialAppでf4）this.debugShowCheckedModeBanner = true,。Falseにして不要バナー消す
+      debugShowCheckedModeBanner: false,
+
+      // ダークテーマにしたい）共通項目ゆえここ）F4してtheme見つけてthemeでF4で使い方みる。dark or light
+      theme: ThemeData.dark(),
+
+      // homeはホーム画面
+      // 赤波線にoption*returnでimport推測
+>>>>>>> 8dd30a24ffcc7c55a8322ebf1569a7f91708b5cf
       home: HomeScreen(),
     );
   }
